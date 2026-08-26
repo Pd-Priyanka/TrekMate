@@ -1,0 +1,6 @@
+# Local environment and build outputs
+.env
+node_modules/
+dist/
+target/
+.idea/
