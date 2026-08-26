@@ -1,0 +1,1 @@
+-- Phase 0 baseline. Domain schema migrations will be added in later phases.

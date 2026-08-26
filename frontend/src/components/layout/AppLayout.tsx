@@ -1,0 +1,2 @@
+import { Outlet } from 'react-router-dom'; import { Footer } from './Footer'; import { Navbar } from './Navbar';
+export function AppLayout() { return <div className="flex min-h-screen flex-col"><a href="#main-content" className="sr-only z-50 rounded-br-lg bg-emerald-600 px-4 py-2 font-bold text-white focus:not-sr-only focus:absolute focus:left-0 focus:top-0">Skip to main content</a><Navbar /><main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6"><Outlet /></main><Footer /></div>; }

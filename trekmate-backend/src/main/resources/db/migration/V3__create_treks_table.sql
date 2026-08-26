@@ -1,0 +1,20 @@
+CREATE TABLE treks (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(150) NOT NULL,
+    slug VARCHAR(180) NOT NULL,
+    location VARCHAR(150) NOT NULL,
+    state VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    difficulty VARCHAR(20) NOT NULL,
+    distance_km DECIMAL(8,2) NOT NULL,
+    duration_days INT NOT NULL,
+    altitude_meters INT NOT NULL,
+    best_season VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    image_url VARCHAR(500) NULL,
+    latitude DECIMAL(10,7) NOT NULL,
+    longitude DECIMAL(10,7) NOT NULL,
+    created_at TIMESTAMP(6) NOT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT uk_treks_slug UNIQUE (slug)
+);

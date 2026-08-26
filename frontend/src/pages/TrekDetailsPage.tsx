@@ -1,0 +1,18 @@
+import { useQuery } from '@tanstack/react-query';
+import { Link, useParams } from 'react-router-dom';
+import { getTrek } from '../api/treks';
+import { DifficultyBadge } from '../components/treks/DifficultyBadge';
+import { FavoriteButton } from '../components/treks/FavoriteButton';
+import { WeatherWidget } from '../components/treks/WeatherWidget';
+import { Seo } from '../components/common/Seo';
+import { ReviewsSection } from '../components/treks/ReviewsSection';
+import { TrekImage } from '../components/treks/TrekImage';
+
+export function TrekDetailsPage() {
+  const { trekId = '' } = useParams(); const trek = useQuery({ queryKey: ['trek', trekId], queryFn: () => getTrek(trekId), enabled: Boolean(trekId) });
+  if (trek.isLoading) return <div className="animate-pulse space-y-5"><div className="h-80 rounded-2xl bg-slate-200 dark:bg-slate-800"/><div className="h-8 w-1/2 rounded bg-slate-200 dark:bg-slate-800"/></div>;
+  if (trek.isError || !trek.data) return <section className="py-16 text-center"><h1 className="text-2xl font-bold">Trek unavailable</h1><p className="mt-3 text-slate-600 dark:text-slate-400">We could not find this trek, or you need to sign in first.</p><Link to="/treks" className="mt-6 inline-flex font-semibold text-emerald-700 dark:text-emerald-400">Back to all treks</Link></section>;
+  const data = trek.data;
+  return <section className="animate-enter"><Seo title={data.name} description={data.description}/><Link to="/treks" className="text-sm font-semibold text-emerald-700 dark:text-emerald-400">← All treks</Link><div className="relative mt-5 min-h-80 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-teal-800 to-sky-700 p-7 sm:p-10"><TrekImage trek={data} loading="eager" className="absolute inset-0 h-full w-full object-cover"/><div className="absolute inset-0 bg-slate-950/55"/><div className="relative flex min-h-64 flex-col justify-end"><div className="flex items-center gap-3"><DifficultyBadge difficulty={data.difficulty}/><span className="text-sm font-medium text-white/80">{data.location}, {data.state}</span></div><div className="mt-4 flex items-end justify-between gap-4"><h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">{data.name}</h1><FavoriteButton trekId={data.id}/></div></div></div><div className="mt-10 grid gap-10 lg:grid-cols-[1fr_330px]"><article><h2 className="text-2xl font-bold">About this trek</h2><p className="mt-4 whitespace-pre-line leading-8 text-slate-600 dark:text-slate-300">{data.description}</p><dl className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-4"><Stat label="Distance" value={`${data.distanceKm} km`}/><Stat label="Duration" value={`${data.durationDays} days`}/><Stat label="Altitude" value={`${data.altitudeMeters.toLocaleString()} m`}/><Stat label="Best season" value={data.bestSeason}/></dl><ReviewsSection trekId={data.id}/></article><aside><WeatherWidget trekId={data.id}/><div className="mt-5 rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900"><h2 className="font-bold">Trail location</h2><p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{data.location}, {data.state}, {data.country}</p><a className="mt-4 inline-flex text-sm font-semibold text-emerald-700 dark:text-emerald-400" target="_blank" rel="noreferrer" href={`https://www.google.com/maps?q=${data.latitude},${data.longitude}`}>Open in maps →</a></div></aside></div></section>;
+}
+function Stat({ label, value }: { label: string; value: string }) { return <div className="rounded-xl bg-slate-100 p-4 dark:bg-slate-900"><dt className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</dt><dd className="mt-2 text-sm font-bold">{value}</dd></div>; }

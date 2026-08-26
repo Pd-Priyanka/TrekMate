@@ -1,0 +1,1 @@
+export function FoundationPage() { return <section><h1 className="text-3xl font-bold">TrekMate</h1><p className="mt-2 text-slate-600 dark:text-slate-400">Frontend foundation is ready. Feature pages will be added in later phases.</p></section>; }

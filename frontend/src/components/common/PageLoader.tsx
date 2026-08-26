@@ -1,0 +1,1 @@
+export function PageLoader() { return <div className="grid min-h-[45vh] place-items-center" role="status" aria-label="Loading page"><div className="h-10 w-10 animate-spin rounded-full border-4 border-emerald-100 border-t-emerald-600 dark:border-emerald-950 dark:border-t-emerald-400"/><span className="sr-only">Loading page</span></div>; }
