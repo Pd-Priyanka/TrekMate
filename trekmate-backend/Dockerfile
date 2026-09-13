@@ -10,5 +10,5 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
 COPY --from=build /build/target/trekmate-backend-*.jar app.jar
 EXPOSE 8080
-HEALTHCHECK --interval=30s --timeout=5s --start-period=45s --retries=3 CMD curl --fail --silent http://localhost:8080/api/v1/health || exit 1
+HEALTHCHECK --interval=30s --timeout=5s --start-period=45s --retries=3 CMD ["sh", "-c", "curl --fail --silent http://localhost:8080/api/v1/health || exit 1"]
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]

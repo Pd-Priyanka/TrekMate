@@ -1,6 +1,12 @@
-# Local environment and build outputs
 .env
+.env.local
+.env.production
+.env.*.local
 node_modules/
 dist/
 target/
 .idea/
+*.iml
+*.tsbuildinfo
+hs_err_pid*.log
+replay_pid*.log

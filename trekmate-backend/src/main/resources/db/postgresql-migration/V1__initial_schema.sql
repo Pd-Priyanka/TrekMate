@@ -1,0 +1,1 @@
+-- PostgreSQL production baseline. Domain schema migrations follow in later versions.

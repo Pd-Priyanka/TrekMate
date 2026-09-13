@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -52,7 +53,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RestClientResponseException.class)
     ResponseEntity<ApiError> weatherApi(RestClientResponseException e, HttpServletRequest r) {
-        return response(HttpStatus.valueOf(e.getStatusCode().value()), "OpenWeather request failed: " + e.getStatusText(), r);
+        return response(HttpStatus.SERVICE_UNAVAILABLE, "Weather data is temporarily unavailable.", r);
+    }
+
+    @ExceptionHandler(RestClientException.class)
+    ResponseEntity<ApiError> weatherUnavailable(RestClientException e, HttpServletRequest r) {
+        return response(HttpStatus.SERVICE_UNAVAILABLE, "Weather data is temporarily unavailable.", r);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
