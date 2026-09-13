@@ -59,11 +59,11 @@ Create a Dockerfile-based application with root directory `trekmate-backend`. Th
 
 ## Frontend Application
 
-Create a Dockerfile-based application with root directory `frontend`. Its Nginx container provides static hosting and SPA fallback.
+Create a Dockerfile-based application with root directory `trekmate-frontend`. Its Nginx container provides static hosting and SPA fallback.
 
 | Setting | Value |
 | --- | --- |
-| Root directory | `frontend` |
+| Root directory | `trekmate-frontend` |
 | Dockerfile | `Dockerfile` |
 | Internal port | `80` |
 | Public domain | `trekmate.<domain>` |

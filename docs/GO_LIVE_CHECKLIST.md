@@ -28,7 +28,7 @@
 
 ## Frontend
 
-- [ ] Coolify frontend application uses root directory `frontend`.
+- [ ] Coolify frontend application uses root directory `trekmate-frontend`.
 - [ ] `VITE_API_BASE_URL` points to the backend `/api` URL.
 - [ ] Frontend production build succeeds.
 - [ ] Frontend is deployed.
