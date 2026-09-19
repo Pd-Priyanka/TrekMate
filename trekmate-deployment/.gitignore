@@ -1,10 +1,4 @@
-.git
-.idea
-.mvn
-target
-*.iml
 .env
 .env.local
 .env.production
 .env.*.local
-README.md

@@ -1,0 +1,10 @@
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'kedarkantha-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'valley-of-flowers-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'hampta-pass-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1483347756197-71ef80e95f73?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'chadar-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'sandakphu-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'roopkund-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'goechala-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1517825738774-7de9363ef735?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'tarsar-marsar-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'kashmir-great-lakes-trek';
+UPDATE treks SET image_url = 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80' WHERE slug = 'brahmatal-trek';

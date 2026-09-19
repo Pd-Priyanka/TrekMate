@@ -1,17 +1,14 @@
 services:
   database:
-    # MySQL 8.4 crashes during startup on the current Docker Desktop runtime.
-    # Use the compatible 8.0 LTS line used by the application's MySQL JDBC driver.
-    image: mysql:8.0
+    image: postgres:16-alpine
     environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-trekmate}
-      MYSQL_USER: ${MYSQL_USER:-trekmate}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?Set MYSQL_PASSWORD in .env}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-trekmate}
+      POSTGRES_USER: ${POSTGRES_USER:-trekmate}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     volumes:
-      - mysql-data:/var/lib/mysql
+      - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -19,14 +16,16 @@ services:
 
   backend:
     build:
-      context: ../2026-07-18/you-are-a-senior-java-full
+      context: ../trekmate-backend
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      DB_URL: jdbc:mysql://database:3306/${MYSQL_DATABASE:-trekmate}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      DB_USERNAME: ${MYSQL_USER:-trekmate}
-      DB_PASSWORD: ${MYSQL_PASSWORD}
+      DB_URL: jdbc:postgresql://database:5432/${POSTGRES_DB:-trekmate}
+      DB_USERNAME: ${POSTGRES_USER:-trekmate}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env}
       OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY:-}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost}
+      PORT: 8080
       LOG_LEVEL_ROOT: ${LOG_LEVEL_ROOT:-WARN}
       LOG_LEVEL_APP: ${LOG_LEVEL_APP:-INFO}
     depends_on:
@@ -56,4 +55,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  mysql-data:
+  postgres-data:

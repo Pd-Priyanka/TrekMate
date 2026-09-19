@@ -15,7 +15,7 @@ flowchart LR
     Browser[React + Vite SPA] -->|HTTPS / API proxy| Nginx
     Nginx -->|Static files| Browser
     Nginx -->|/api| Backend[Spring Boot 3 / Java 21]
-    Backend -->|JPA + Flyway| MySQL[(MySQL 8.0)]
+    Backend -->|JPA + Flyway (production)| PostgreSQL[(PostgreSQL 16)]
     Backend -->|Current weather| OpenWeather[OpenWeather API]
 ```
 
@@ -46,7 +46,7 @@ flowchart TB
 | Area | Technology |
 | --- | --- |
 | Backend | Java 21, Spring Boot 3, Spring Data JPA, Spring Security |
-| Data | MySQL 8.0, Flyway |
+| Data | MySQL 8.0 (local), PostgreSQL 16 (production), Flyway |
 | Frontend | React, TypeScript, Vite, Tailwind, React Query |
 | Delivery | Docker, Docker Compose, Nginx, GitHub Actions |
 
@@ -96,10 +96,10 @@ When the backend is running:
 
 ## Production deployment
 
-The Compose stack is maintained in the sibling [`trekmate-deployment`](../../trekmate-deployment/README.md) directory. It builds the frontend and backend, runs MySQL, and exposes a single Nginx entry point.
+The Compose stack is maintained in the sibling [`trekmate-deployment`](../trekmate-deployment/README.md) directory. It builds the frontend and backend, runs PostgreSQL, and exposes a single Nginx entry point.
 
 ```bash
-cd ../../trekmate-deployment
+cd ../trekmate-deployment
 docker compose up --build -d
 ```
 

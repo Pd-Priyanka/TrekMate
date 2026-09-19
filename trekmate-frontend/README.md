@@ -11,7 +11,7 @@ Copy `.env.example` to `.env` when configuring a non-default API base URL.
 
 ## Production deployment
 
-The frontend has a multi-stage [Dockerfile](Dockerfile) that builds the Vite bundle and serves it through Nginx. The Nginx configuration proxies backend API requests through the same origin. Run the complete deployment stack from the sibling [deployment directory](../trekmate-deployment/README.md).
+The frontend has a multi-stage [Dockerfile](Dockerfile) that builds the Vite bundle and serves it through Nginx, including SPA route fallback. Configure `VITE_API_BASE_URL` at build time with the public backend URL, for example `https://api.trekmate.<domain>/api`. The container is suitable for Docker-based hosting such as Coolify.
 
 ## Authentication security note
 
